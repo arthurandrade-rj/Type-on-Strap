@@ -23,6 +23,7 @@ Depois que você já baixou e importou o dataset de filmes pro Power BI, nós va
 
 **Passo 1:** importar a tabela do site "US Inflation Calculator"
 
+![Jetpacktocat](https://octodex.github.com/images/jetpacktocat.png)
 
 ![Passo1](https://github.com/arthurandrade-rj/Type-on-Strap/blob/master/assets/img/Imagem1.png)
 
