@@ -24,53 +24,53 @@ Depois que você já baixou e importou o dataset de filmes pro Power BI, nós va
 **Passo 1:** importar a tabela do site "US Inflation Calculator"
 
 
-![Passo 1](https://imgur.com/LPlEf5L)
+![Passo 1](https://i.imgur.com/LPlEf5Lg.png)
 
-![Passo 1](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/images/Imagem2.png)
+![Passo 1](https://i.imgur.com/qmOsI89.png)
 
 **Passo 2:** Selecionar todas as colunas de Jan a Dec, ir até a guia "Transformar" e transpôr as colunas em linhas
 
-![Passo 3](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem3.png)
+![Passo 3](https://i.imgur.com/xBczvbU.png)
 
 **Passo 3:** Adicionar uma coluna condicional que transforme o texto de mês em valores
 
-![Passo 4](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem4.png)
+![Passo 4](https://i.imgur.com/P3Kxr9p.png)
 
 **Passo 4:** Você precisará transformar a coluna de Ano (Year) e Numero de Mês (n_month) em texto, e a coluna valor em número decimal
 
-![Passo 5](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem5.png)
+![Passo 5](https://i.imgur.com/5Tkebea.png)
 
 **Passo 5:** Vá até a guia "Adicionar coluna" e crie uma coluna personalizada, cujo valor será uma concatenação entre Numero do Mês e Ano
 
-![Passo 6](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem6.png)
+![Passo 6](https://i.imgur.com/s3wVoMu.png)
 
 **Passo 6:** Seu novo campo precisa ser categorizado como data. Para isso, clique na coluna e selecione a opção "Usar Localidade" na lista. No campo "Tipo de Dados" selecione Data e em Localidade selecione Português (Brasil).
 
-![Passo 7](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem7.png)
+![Passo 7](https://i.imgur.com/KSjfrco.png)
 
 **Passo 7:** Na sua tabela "movies_table", transforme o campo "release_date" em Data. Mas atenção! Como esse campo está no formato americano (padrão) ele pode tanto ser transformado diretamente, quanto utilizando a opção "Usar Localidade...", e escolhendo o país EUA.
 
-![Passo 8](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem8.png)
+![Passo 8](https://i.imgur.com/pAlwm3R.png)
 
 **Passo 8:** Você perceberá que alguns valores trarão erro. Por exemplo, é impossível categorizar "N/A" como data. Para isso, vamos tratar da seguinte forma: toda vez que algum valor for considerado erro, substituiremos por "null". Clique no botão direito, escolha a opção "Substituir erros..." e coloque null no campo de valor.
 
-![Passo 9](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem9.png)
+![Passo 9](https://i.imgur.com/1iXHdwh.png)
 
 **Passo 9:** A nossa missão dentro do Power Query terminou. Você já pode clicar em Fechar e Aplicar e passar para a tela do Power BI. Aqui, criaremos uma coluna que nos trará o valor de "release_date" ajustado, ou seja: apenas o primeiro dia do mês, até pq, nós não vemos inflação por dia. Para isso, abra a sua tabela no Power BI, e crie a seguinte coluna calculada:
 
-![Passo 10](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem10.png)
+![Passo 10](https://i.imgur.com/oPjNyU0.png)
 
 # 2. Estabelecendo relações
 
 Nesta segunda etapa, precisaremos acessar o menu "Ferramentas de tabela" e escolher a opção "Gerenciar relações". Estabeleceremos uma relação de "Muitos para um (*:1)" entre as colunas release (movies_table) e Date (inflation_table). Isso significa que para cada muitos registros de data na tabela movies_table teremos apenas um registro de data na tabela inflation_table.
 
-![Passo 11](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem11.png)
+![Passo 11](https://i.imgur.com/YBrJCUg.png)
 
 
 # 3. Criando as fórmulas
 Nessa etapa final, criaremos as fórmulas necessárias para chegar ao nosso resultado.
 
-![Passo 12](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem12.png)
+![Passo 12](https://i.imgur.com/rqUGSt4.png)
 
 **Formula 1: cum_inflation (Inflação Acumulada)**
 
@@ -106,7 +106,7 @@ Depois disso, é só alegria. Basta multiplicar os valores de receita (revenue) 
 # 4. O resultado...
 Tcharam!
 
-![Passo 13](https://github.com/arthurandrade-rj/arthurandrade-rj.github.io/blob/master/assets/Imagem13.png)
+![Passo 13](https://i.imgur.com/RMId5To.png)
 
 Vemos ali entre o ano de 1940 e 1960 uma mudança significativa entre os valores "originais" e os valores ajustados. Lembrando que entre 1939 e 1945 tivemos a Segunda Guerra Mundial, que impactou fortemente as economias globais e mudou a história do cinema pra sempre (você pode ler mais sobre aqui).
 
