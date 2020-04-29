@@ -105,7 +105,7 @@ Depois disso, é só alegria. Basta multiplicar os valores de receita (revenue) 
 
     ```ruby
     adjusted_revenue = SUM(movies_table[revenue])*[cum_inflation]
-    ```ruby
+    ```
 
 # 4. O resultado...
 Tcharam!
