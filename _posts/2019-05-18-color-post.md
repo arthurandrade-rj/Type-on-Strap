@@ -80,7 +80,7 @@ Primeiro, criaremos uma variável chamada **min_date**, que me dará a data mín
 
 Isso significa que podemos ver a receita dos filmes lançados tanto no ano todo quanto num mês específico. Para fins de simplificação, a inflação de 1990 até 2020 será considerada desde Jan/1990 até o ultimo mês de 2020.
 
-    ```css
+   
     cum_inflation = 
         VAR min_date = IF(ISINSCOPE(inflation_table[Date].[Ano]);
         DATE(MIN(inflation_table[Date].[Ano]);1;1);
@@ -93,7 +93,7 @@ Isso significa que podemos ver a receita dos filmes lançados tanto no ano todo 
         DATESBETWEEN('inflation_table'[Date];min_date;
         CALCULATE(MAX('inflation_table'[Date]);ALL(inflation_table))        
     ))
-    ```
+
 
 A função **ISINSCOPE** testa se você está usando uma hierarquia ou não. Se estiver usando uma hierarquia de ano, a variável retornará a menor data de Janeiro. Se não, retornará a própria data. Por exemplo: se estivermos vendo filmes lançados em 01/04/1990 na hierarquia anual, então o mês de base para o cálculo será 01/01/1990. Se não estivermos vendo na hierarquia, o mês base será o próprio 01/04/1990.
 
@@ -103,9 +103,9 @@ Como retorno, usaremos o **CALCULATE** (que filtra e depois calcula) para trazer
 
 Depois disso, é só alegria. Basta multiplicar os valores de receita (revenue) pelo valor da inflação que acabamos de calcular!
 
-    ```ruby
+    
     adjusted_revenue = SUM(movies_table[revenue])*[cum_inflation]
-    ```
+   
 
 # 4. O resultado...
 Tcharam!
