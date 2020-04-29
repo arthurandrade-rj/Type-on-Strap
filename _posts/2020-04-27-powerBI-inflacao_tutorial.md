@@ -1,4 +1,4 @@
---
+---
 layout: post
 title: "Ajustando automaticamente"
 tags: [PowerBI, cinema, inflação, tutorial]
