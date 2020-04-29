@@ -175,5 +175,4 @@ Duvidas? Sugestões? Críticas? Manda um email pra arthurandrade.rj@hotmail.com,
     
     in
     
-    #"Tipo Alterado com Localidade" 
-
+    #"Tipo Alterado com Localidade"
