@@ -2,7 +2,7 @@
 layout: post
 title: "Ajustando automaticamente bilheteria de filmes pela inflação"
 tags: [PowerBI, cinema, inflação, tutorial]
-color: brown
+color: blue
 author: arthurandrade-rj
 ---
 
@@ -19,7 +19,7 @@ Para começar a responder essa questão, vamos tentar ajustar valores de bilhete
 # 1. Web Scrapping e Transformação de Dados
 O conjunto de dados primário que utilizaremos é o "movies_metadata.csv" descrito [nesta competição do Kaggle](https://www.kaggle.com/rounakbanik/the-movies-dataset).
 
-Depois que você já baixou e importou o dataset de filmes pro Power BI, nós vamos precisar [deste site](https://www.usinflationcalculator.com/inflation/current-inflation-rates/), que nos dará informações sobre a inflação.
+Depois que você já baixou e importou o dataset de filmes pro Power BI, nós vamos precisar [deste site](https://www.usinflationcalculator.com/monthly-us-inflation-rates-1913-present/), que nos dará informações sobre a inflação.
 
 **Passo 1:** importar a tabela do site "US Inflation Calculator"
 
@@ -119,48 +119,57 @@ Isso pode ser muito útil quando você precisar atualizar valores por um determi
 
 Duvidas? Sugestões? Críticas? Manda um email pra arthurandrade.rj@hotmail.com, ou então me chama no wpp: +5521981133625.
 
-Código M
 
 
+---------------------
 
+# Código M - Tabela de Inflação
+    
 
+    let
+    Fonte = Web.Page(Web.Contents("https://www.usinflationcalculator.com/monthly-us-inflation-rates-1913-present/")),
 
+    Data0 = Fonte{0}[Data],
 
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Data0, [PromoteAllScalars=true]),
 
+    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Year", Int64.Type},
+     {"Jan", type text}, 
+     {"Feb", type number}, 
+     {"Mar", type number}, 
+     {"Apr", type number}, 
+     {"May", type number}, 
+     {"Jun", type number}, 
+     {"Jul", type number}, 
+     {"Aug", type number}, 
+     {"Sep", type number}, 
+     {"Oct", type number}, 
+     {"Nov", type number}, 
+     {"Dec", type number}}),
 
+    #"Colunas Não Dinâmicas" = Table.UnpivotOtherColumns(#"Tipo Alterado", {"Year"}, "Atributo", "Valor"),
 
+    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Colunas Não Dinâmicas", "n_month", each 
 
-# What a colorful post!
+    if [Atributo] = "Jan" then 1 else 
+    if [Atributo] = "Feb" then 2 else 
+    if [Atributo] = "Mar" then 3 else 
+    if [Atributo] = "Apr" then 4 else 
+    if [Atributo] = "May" then 5 else 
+    if [Atributo] = "Jun" then 6 else 
+    if [Atributo] = "Jul" then 7 else 
+    if [Atributo] = "Aug" then 8 else 
+    if [Atributo] = "Sep" then 9 else 
+    if [Atributo] = "Oct" then 10 else
+    if [Atributo] = "Nov" then 11 else 12),
 
-This is an idea that came from [xukimseven/HardCandy-Jekyll](https://github.com/xukimseven/HardCandy-Jekyll) 
-looking at this cheerful and colorful them, I wanted to enable something similar for mine.
+    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Coluna Condicional Adicionada",{{"n_month", type text}, {"Valor", type number}, {"Year", type text}}),
 
-You can go fork and star hers too! 😉
+    #"Personalização Adicionada" = Table.AddColumn(#"Tipo Alterado1", "Date", each "01/"&[n_month]&"/"&[Year]),
 
-<!--more-->
+    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Personalização Adicionada", {{"Date", type date}}, "pt-BR")
+    
+    in
+    
+    #"Tipo Alterado com Localidade" 
 
-## How does it work?
-
-Basically you need to add just one thing, the color:
-
-```yml
----
-layout: post
-title: Color Post
-color: brown
----
-```
-
-It can either be a html color like `brown` (which look like red to me). Or with the rgb:
-
-```yml
----
-layout: post
-title: Color Post
-color: rgb(165,42,42)
----
-```
-
-The background used is `lineart.png` from [xukimseven](https://github.com/xukimseven) you can edit it in the config file. 
-If you want another one, put it in `/assets/img` as well. 
-> ⚠️ It's a bit hacking the css in the `post.html`
